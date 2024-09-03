@@ -53,11 +53,11 @@ class ImplicitRecommender:
 if __name__ == "__main__":
 
     # load user artists matrix
-    user_artists = load_user_artists(Path("../lastfmdata/user_artists.dat"))
+    user_artists = load_user_artists(Path("lastfmdata/user_artists.dat"))
 
     # instantiate artist retriever
     artist_retriever = ArtistRetriever()
-    artist_retriever.load_artists(Path("../lastfmdata/artists.dat"))
+    artist_retriever.load_artists(Path("lastfmdata/artists.dat"))
 
     # instantiate ALS using implicit
     implict_model = implicit.als.AlternatingLeastSquares(
@@ -67,7 +67,7 @@ if __name__ == "__main__":
     # instantiate recommender, fit, and recommend
     recommender = ImplicitRecommender(artist_retriever, implict_model)
     recommender.fit(user_artists)
-    artists, scores = recommender.recommend(2, user_artists, n=5)
+    artists, scores = recommender.recommend(8, user_artists, n=5)
 
     # print results
     for artist, score in zip(artists, scores):
